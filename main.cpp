@@ -9,7 +9,7 @@ using namespace std;
 
 int main()
 {
-    sf::RenderWindow window(sf::VideoMode(800, 600), "3D Sound");
+    sf::RenderWindow window(sf::VideoMode(800, 600), "2D Sound");
     ImGui::SFML::Init(window);
     sf::Clock deltaClock;
     bool running = true;
