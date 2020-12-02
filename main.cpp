@@ -100,6 +100,7 @@ int main()
 
             if(!followMouse)
             {
+                // Update rotation
                 t += dt.asSeconds() * angular_velocity;
 
                 pos.x = radius * std::cos(t);
@@ -108,8 +109,10 @@ int main()
             }
             else
             {
+                // Follow the mouse
                 auto m = sf::Mouse::getPosition(window);
                 auto siz = window.getSize();
+                // Convert origin to center
                 m.x = m.x - siz.x / 2.f;
                 m.y = m.y - siz.y / 2.f;
 
@@ -132,7 +135,7 @@ int main()
             center.setFillColor(sf::Color::Red);
             window.draw(center);
 
-            // Min Distance
+            // Draw the Min Distance circle
             sf::CircleShape minDistanceCir{sound_distance};
             minDistanceCir.setOrigin(minDistanceCir.getRadius(), minDistanceCir.getRadius());
             minDistanceCir.setPosition(centerPos.x, centerPos.y);
@@ -141,7 +144,7 @@ int main()
             minDistanceCir.setOutlineColor(sf::Color::Blue);
             window.draw(minDistanceCir);
 
-
+            // Draw the attenuation circles
             for (float i = 1000.f; i >= 0; i -= 1.f)
             {
                 float radius = sound_distance + i;
