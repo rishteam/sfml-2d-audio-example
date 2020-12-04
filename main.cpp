@@ -91,6 +91,24 @@ int main()
             ImGui::Separator();
             float dis = sqrt(pow(pos.x,2)+pow(pos.y,2));
             ImGui::Text("Volume = %.2f", GetSoundFactor(dis) );
+            ImGui::Separator();
+            ImGui::Text("%.2f/%.2f s, %d/%d ms",
+                sound.getPlayingOffset().asSeconds(),
+                sound.getBuffer()->getDuration().asSeconds(),
+                sound.getPlayingOffset().asMilliseconds(),
+                sound.getBuffer()->getDuration().asMilliseconds());
+            float nowProgress = sound.getPlayingOffset().asSeconds();
+            if(ImGui::SliderFloat("Now", &nowProgress, 0, sound.getBuffer()->getDuration().asSeconds()))
+            {
+                sound.pause();
+                sound.setPlayingOffset(sf::seconds(nowProgress));
+                sound.play();
+            }
+            float volume = sound.getVolume();
+            if(ImGui::SliderFloat("Volume", &volume, 0.f, 100.f))
+            {
+                sound.setVolume(volume);
+            }
         }
         ImGui::End();
 
